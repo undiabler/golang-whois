@@ -35,17 +35,28 @@ func parser(re *regexp.Regexp, group int, data string) (result []string) {
 }
 
 //Parse uniq name servers from whois
-func ParseNameServers(whois string) []string {
+func (w Whois) NameServers() []string {
 
-	return parser(regexp.MustCompile(`(?i)Name Server:\s+(.*?)(\s|$)`), 1, whois)
+	return parser(regexp.MustCompile(`(?i)Name Server:\s+(.*?)(\s|$)`), 1, w.raw)
 
 }
 
 //Parse uniq domain status(codes) from whois
-func ParseDomainStatus(whois string) []string {
+func (w Whois) Status() []string {
 
-	return parser(regexp.MustCompile(`(?i)(Domain )?Status:\s+(.*?)(\s|$)`), 2, whois)
+	return parser(regexp.MustCompile(`(?i)(Domain )?Status:\s+(.*?)(\s|$)`), 2, w.raw)
 
+}
+
+//Parse uniq name servers from whois
+func (w Whois) Emails() []string {
+
+	return parser(regexp.MustCompile(`(?i)(Admin|Tech) Email:\s+(.*?)(\s|$)`), 2, w.raw)
+
+}
+
+func (w Whois) String() string {
+	return w.raw
 }
 
 func appendIfMissing(slice []string, i string) []string {
