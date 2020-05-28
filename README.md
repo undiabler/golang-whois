@@ -30,11 +30,12 @@ extra.go: some extra functions to parse whois info
 
     result, err := whois.GetWhois("google.com")
     if err != nil {
-
-        fmt.Println(result)
-
-        fmt.Printf("Nameservers: %v \n",whois.ParseNameServers(result))
-    }
+		fmt.Printf("Error in whois lookup : %v \n", err)
+	} else {
+		fmt.Println(result)
+		fmt.Printf("Nameservers: %v \n", whois.ParseNameServers(result))
+	}
+    
 
 ## LICENSE
 
