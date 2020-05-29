@@ -38,7 +38,6 @@ func parser(re *regexp.Regexp, group int, data string) (result []string) {
 func (w Whois) NameServers() []string {
 
 	return parser(regexp.MustCompile(`(?i)Name Server:\s+(.*?)(\s|$)`), 1, w.raw)
-
 }
 
 //Parse uniq domain status(codes) from whois
@@ -54,6 +53,7 @@ func (w Whois) Emails() []string {
 	return parser(regexp.MustCompile(`(?i)(Admin|Tech) Email:\s+(.*?)(\s|$)`), 2, w.raw)
 
 }
+
 
 func (w Whois) String() string {
 	return w.raw

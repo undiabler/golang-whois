@@ -25,6 +25,7 @@ type Whois struct {
 }
 
 //Simple connection to whois servers with default timeout 5 sec
+
 func GetWhois(domain string) (Whois, error) {
 
 	return GetWhoisTimeout(domain, time.Second*5)
@@ -32,6 +33,7 @@ func GetWhois(domain string) (Whois, error) {
 }
 
 //Connection to whois servers with various time.Duration
+
 func GetWhoisTimeout(domain string, timeout time.Duration) (result Whois, err error) {
 
 	var (
@@ -64,7 +66,6 @@ func GetWhoisTimeout(domain string, timeout time.Duration) (result Whois, err er
 	}
 
 	defer connection.Close()
-
 	connection.Write([]byte("" + domain + "\r\n"))
 
 	buffer, err = ioutil.ReadAll(connection)
@@ -72,7 +73,6 @@ func GetWhoisTimeout(domain string, timeout time.Duration) (result Whois, err er
 	if err != nil {
 		return
 	}
-
 	result = Whois{raw: string(buffer)}
 
 	return
