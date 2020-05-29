@@ -30,6 +30,8 @@ extra.go: some extra functions to parse whois info
 
     result, err := whois.GetWhois("google.com")
     if err != nil {
+        fmt.Println("Error in whois lookup : %v ", err)
+    }else{
 
         fmt.Println(result)
 
