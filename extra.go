@@ -36,7 +36,7 @@ func parser(re *regexp.Regexp, group int, data string) (result []string) {
 //Parse uniq name servers from whois
 func ParseNameServers(whois string) []string {
 	
-	resultNameServers := parser(regexp.MustCompile(`(?i)Name Server:\s+(.*?)(\s|$)`), 1, whois)
+	resultNameServers := parser(regexp.MustCompile(`(?i)^N(?:.*)Server:\s+(.*?)(?:\s|$)`), 1, whois)
 
 	if len(resultNameServers) == 0 {
 		var re = regexp.MustCompile(`(?i)(Name servers:\n(?:\s+(?:[a-zA-Z-_\.0-9]+)\n)+)`)
